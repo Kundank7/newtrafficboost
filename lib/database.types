@@ -1,0 +1,121 @@
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[]
+
+export interface Database {
+  public: {
+    Tables: {
+      profiles: {
+        Row: {
+          id: string
+          email: string
+          balance: number
+          role: 'user' | 'admin'
+          created_at: string
+        }
+        Insert: {
+          id: string
+          email: string
+          balance?: number
+          role?: 'user' | 'admin'
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          email?: string
+          balance?: number
+          role?: 'user' | 'admin'
+          created_at?: string
+        }
+      }
+      services: {
+        Row: {
+          id: number
+          name: string
+          type: 'country' | 'device' | 'worldwide' | 'mixed'
+          price_per_unit: number
+          created_at: string
+        }
+        Insert: {
+          name: string
+          type: 'country' | 'device' | 'worldwide' | 'mixed'
+          price_per_unit: number
+          created_at?: string
+        }
+        Update: {
+          name?: string
+          type?: 'country' | 'device' | 'worldwide' | 'mixed'
+          price_per_unit?: number
+          created_at?: string
+        }
+      }
+      deposits: {
+        Row: {
+          id: number
+          user_id: string
+          name: string
+          email: string
+          message: string | null
+          screenshot_url: string | null
+          method: 'upi' | 'crypto'
+          amount: number
+          status: 'pending' | 'completed' | 'rejected'
+          created_at: string
+        }
+        Insert: {
+          user_id: string
+          name: string
+          email: string
+          message?: string | null
+          screenshot_url?: string | null
+          method: 'upi' | 'crypto'
+          amount: number
+          status?: 'pending' | 'completed' | 'rejected'
+          created_at?: string
+        }
+        Update: {
+          user_id?: string
+          name?: string
+          email?: string
+          message?: string | null
+          screenshot_url?: string | null
+          method?: 'upi' | 'crypto'
+          amount?: number
+          status?: 'pending' | 'completed' | 'rejected'
+          created_at?: string
+        }
+      }
+      orders: {
+        Row: {
+          id: number
+          user_id: string
+          service_id: number
+          quantity: number
+          total_amount: number
+          status: 'pending' | 'processing' | 'running' | 'completed' | 'cancelled'
+          created_at: string
+        }
+        Insert: {
+          user_id: string
+          service_id: number
+          quantity: number
+          total_amount: number
+          status?: 'pending' | 'processing' | 'running' | 'completed' | 'cancelled'
+          created_at?: string
+        }
+        Update: {
+          user_id?: string
+          service_id?: number
+          quantity?: number
+          total_amount?: number
+          status?: 'pending' | 'processing' | 'running' | 'completed' | 'cancelled'
+          created_at?: string
+        }
+      }
+    }
+  }
+}
